@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ring: 0 0% 0%;
+}
+
+textarea::selection {
+  background: rgba(147, 197, 253, 0.6);
+}
