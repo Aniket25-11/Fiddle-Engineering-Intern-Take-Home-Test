@@ -1,6 +1,7 @@
+const API_BASE = import.meta.env.VITE_API_BASE || ''
+
 export async function rewriteTone({ text, formality, warmth, intensity, signal }) {
-  const res = await fetch('/api/tone', {
-  // const res = await fetch('http://localhost:8787/api/tone', {
+  const res = await fetch(`${API_BASE}/api/tone`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text, formality, warmth, intensity }),
