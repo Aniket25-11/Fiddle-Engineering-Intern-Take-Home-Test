@@ -3,19 +3,28 @@ import { FORMALITY, WARMTH, styleFromCell } from '../lib/prompt'
 
 export default function ToneGrid({ onPick, selected, disabled }) {
   return (
-    <div className={clsx("grid grid-cols-3 grid-rows-3 gap-2", disabled && "opacity-60 pointer-events-none")} role="grid" aria-disabled={disabled}>
-      {[0,1,2].map((r) => (
-        [0,1,2].map((c) => {
+    <div
+      className={clsx(
+        "grid grid-cols-3 grid-rows-3 gap-2",
+        disabled && "opacity-60 pointer-events-none"
+      )}
+      role="grid"
+      aria-disabled={disabled}
+    >
+      {[0, 1, 2].map((r) =>
+        [0, 1, 2].map((c) => {
           const isSelected = selected && selected.r === r && selected.c === c
-          const style = styleFromCell(r,c)
+          const style = styleFromCell(r, c)
           return (
             <button
               key={`${r}-${c}`}
               onClick={() => onPick({ r, c, ...style })}
               className={clsx(
-                "h-16 rounded-xl border text-xs px-2 py-1 transition",
-                "hover:shadow-sm active:translate-y-px",
-                isSelected ? "border-blue-600 ring-2 ring-blue-200 bg-white" : "border-slate-200 bg-slate-50"
+                "h-16 rounded-xl border text-xs px-2 py-1 transition-colors",
+                "hover:bg-slate-200 active:translate-y-px",
+                isSelected
+                  ? "border-slate-200 bg-slate-300" // ✅ selected → darker bg, normal border
+                  : "border-slate-200 bg-slate-50"
               )}
               aria-pressed={isSelected}
               role="gridcell"
@@ -25,7 +34,7 @@ export default function ToneGrid({ onPick, selected, disabled }) {
             </button>
           )
         })
-      ))}
+      )}
       <Legend />
     </div>
   )
