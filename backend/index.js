@@ -91,6 +91,5 @@ app.get('/', (req, res) => {
 
 app.get('/health', (req, res) => res.json({ ok: true }))
 
-app.listen(PORT, () => {
-  console.log(`Tone Picker backend running on http://localhost:${PORT}`)
-})
+
+export default app;
