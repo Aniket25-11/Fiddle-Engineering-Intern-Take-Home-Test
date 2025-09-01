@@ -53,7 +53,6 @@ app.post('/api/tone', async (req, res) => {
     '- Return only the revised text without any extra commentary.'
   ].join('\n')
 
-  // temperature based on intensity; center=0.2, edges=0.55
   const temp = [0.2, 0.35, 0.55][intensity] || 0.35
 
   try {
@@ -83,6 +82,11 @@ app.post('/api/tone', async (req, res) => {
     const detail = err.response?.data || err.message || 'Unknown error'
     res.status(status).json({ error: typeof detail === 'string' ? detail : (detail.error || JSON.stringify(detail)), code: status })
   }
+})
+
+// 👇 NEW ROOT ROUTE
+app.get('/', (req, res) => {
+  res.send('<h2>✅ Tone Picker backend is running</h2><p>Use <code>POST /api/tone</code> for tone rewriting or <code>/health</code> for status.</p>')
 })
 
 app.get('/health', (req, res) => res.json({ ok: true }))
